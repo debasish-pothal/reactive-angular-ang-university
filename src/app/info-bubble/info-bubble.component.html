@@ -1,0 +1,20 @@
+<div class="tooltip-icon" (click)="toggleTooltip()">
+  <span>ii</span>
+  <div
+    #tooltipContainer
+    [ngClass]="['tooltip-container', positionClass]"
+    [ngStyle]="{ display: showTooltip ? 'block' : 'none', width: tooltipWidth }"
+    (click)="$event.stopPropagation()"
+  >
+    <div #tooltipContent class="tooltip-content">
+      <ng-container *ngIf="isTooltipString; else tooltipTemplate">
+        {{ tooltip }}
+      </ng-container>
+      <ng-template #tooltipTemplate>
+        <div class="tooltip-ng-content">
+          <ng-content></ng-content>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

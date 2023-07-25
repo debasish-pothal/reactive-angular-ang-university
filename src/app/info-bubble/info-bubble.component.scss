@@ -1,0 +1,102 @@
+/* Customize the tooltip appearance as desired */
+.tooltip-icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  .tooltip-container {
+    position: absolute;
+    background-color: #fff; /* Set background color to white */
+    color: #000; /* Set text color to black */
+    padding: 10px;
+    z-index: 999;
+    min-width: 300px;
+    border: 1px solid #ccc; /* Add gray border to the container */
+    box-shadow:
+  0px 0px 1.1px rgba(0, 0, 0, 0.012),
+  0px 0px 2.4px rgba(0, 0, 0, 0.023),
+  0px 0px 4px rgba(0, 0, 0, 0.032),
+  0px 0px 6.1px rgba(0, 0, 0, 0.041),
+  0px 0px 8.8px rgba(0, 0, 0, 0.048),
+  0px 0px 12.4px rgba(0, 0, 0, 0.056),
+  0px 0px 17.6px rgba(0, 0, 0, 0.063),
+  0px 0px 25.6px rgba(0, 0, 0, 0.071),
+  0px 0px 39.4px rgba(0, 0, 0, 0.082),
+  0px 0px 70px rgba(0, 0, 0, 0.11);
+
+    // Common styles for pointer
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      z-index: 1000;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent; /* Set triangle background color to white */
+    }
+
+    // Top-Right position with pointer at the bottom-left
+    &.tooltip-top-right {
+      bottom: calc(100% + 2px); /* Adjust this value to remove the gap */
+      left: 5px;
+
+      &::before {
+        top: 100%;
+        left: 15px;
+        border-width: 0 10px 10px 0;
+        border-color: transparent #fff transparent transparent; /* Set triangle background color to white */
+        transform: rotate(135deg);
+        transform-origin: 0 0;
+      }
+    }
+
+    // Top-Left position with pointer at the bottom-right
+    &.tooltip-top-left {
+      bottom: calc(100% + 2px); /* Adjust this value to remove the gap */
+      right: 5px;
+
+      &::before {
+        top: 100%;
+        right: 0;
+        border-width: 0 0 10px 10px;
+        border-color: transparent transparent #fff transparent; /* Set triangle background color to white */
+        transform: rotate(45deg);
+        transform-origin: 100% 0;
+      }
+    }
+
+    // Bottom-Right position with pointer at the top-left
+    &.tooltip-bottom-right {
+      top: calc(100% + 2px); /* Adjust this value to remove the gap */
+      left: 5px;
+
+      &::before {
+        bottom: 100%;
+        left: 0;
+        border-width: 10px 10px 0 0;
+        border-color: #fff transparent transparent transparent; /* Set triangle background color to white */
+        transform: rotate(45deg);
+        transform-origin: 0 100%;
+      }
+    }
+
+    // Bottom-Left position with pointer at the top-right
+    &.tooltip-bottom-left {
+      top: calc(100% + 2px); /* Adjust this value to remove the gap */
+      right: 5px;
+
+      &::before {
+        bottom: 100%;
+        right: 0;
+        border-width: 10px 0 0 10px;
+        border-color: #fff transparent transparent transparent; /* Set triangle background color to white */
+        transform: rotate(-45deg);
+        transform-origin: 100% 100%;
+      }
+    }
+  }
+
+  .tooltip-content {
+    /* Add your styles here */
+  }
+}
