@@ -24,6 +24,31 @@ export class CoursesService {
     );
   }
 
+  loadCourseById(courseId: number): Observable<Course> {
+    return this.http
+      .get<Course>(`/api/courses/${courseId}`)
+      .pipe(shareReplay());
+  }
+
+  loadAllCourseLessions(courseId: number): Observable<Lesson[]> {
+    return this.http
+      .get<Lesson[]>('/api/lessons', {
+        params: {
+          courseId: courseId.toString(),
+          pageSize: '1000',
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          const message = 'Could not load lessions';
+          this.messagesService.showErrors(message);
+          return throwError(err);
+        }),
+        map((res) => res['payload']),
+        shareReplay()
+      );
+  }
+
   saveCourse(courseId: string, changes: Partial<Course>): Observable<any> {
     return this.http
       .put(`/api/courses/${courseId}`, changes)
@@ -32,7 +57,7 @@ export class CoursesService {
 
   searchLessions(search: string): Observable<Lesson[]> {
     return this.http
-      .get<Lesson[]>('/api/lessions', {
+      .get<Lesson[]>('/api/lessons', {
         params: {
           filter: search,
           pageSize: '100',
